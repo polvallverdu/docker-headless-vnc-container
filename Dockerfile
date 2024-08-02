@@ -1,6 +1,7 @@
 # This Dockerfile is used to build an headles vnc image based on Debian
 
-FROM debian:11-slim
+FROM ubuntu:lunar
+# FROM debian:11-slim
 
 ENV REFRESHED_AT 2023-01-27
 
@@ -53,6 +54,13 @@ RUN $INST_SCRIPTS/no_vnc.sh
 ### Install IceWM UI
 RUN $INST_SCRIPTS/icewm_ui.sh
 ADD ./src/debian/icewm/ $HOME/
+
+# OBS
+RUN mkdir -p $INST_SCRIPTS/obs
+ADD ./src/obs/ $INST_SCRIPTS/obs/
+
+### Install obs-studio-portable
+RUN $INST_SCRIPTS/obs/install.sh
 
 ### configure startup
 RUN $INST_SCRIPTS/libnss_wrapper.sh
