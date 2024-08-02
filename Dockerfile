@@ -60,7 +60,7 @@ RUN mkdir -p $INST_SCRIPTS/obs
 ADD ./src/obs/ $INST_SCRIPTS/obs/
 
 ### Install obs-studio-portable
-RUN $INST_SCRIPTS/obs/install.sh
+RUN add-apt-repository ppa:obsproject/obs-studio && apt update && apt-get update && apt-get install -y obs-studio && apt-get clean -y
 
 ### configure startup
 RUN $INST_SCRIPTS/libnss_wrapper.sh
